@@ -39,6 +39,8 @@ public final class MovecraftCoreProtect extends JavaPlugin {
             return;
         }
 
+        saveDefaultConfig();
+
         getConfig().getBoolean("LogInteractions", true);
         getConfig().getBoolean("LogBlocks", false);
 
