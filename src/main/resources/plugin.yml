@@ -5,4 +5,4 @@ api-version: 1.14
 depend: [ Movecraft, CoreProtect ]
 authors: [ TylerS1066 ]
 description: Movecraft Integration with CoreProtect
-website: TODO
+website: https://github.com/TylerS1066/Movecraft-CoreProtect
