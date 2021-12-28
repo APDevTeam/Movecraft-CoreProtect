@@ -20,36 +20,36 @@ import org.jetbrains.annotations.NotNull;
 public class CraftDetectListener implements Listener {
     @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onCraftDetect(@NotNull CraftDetectEvent e) {
-        if(!(e.getCraft() instanceof PilotedCraft))
+        if (!(e.getCraft() instanceof PilotedCraft))
             return;
 
-        if(MovecraftCoreProtect.getInstance() == null)
+        if (MovecraftCoreProtect.getInstance() == null)
             return;
         CoreProtectAPI api = MovecraftCoreProtect.getInstance().getCoreProtectAPI();
-        if(api == null)
+        if (api == null)
             return;
 
         String userName = ((PilotedCraft) e.getCraft()).getPilot().getName();
         World w = e.getCraft().getWorld();
         String typeName = e.getCraft().getType().getStringProperty(CraftType.NAME);
-        for(MovecraftLocation movecraftLocation : e.getCraft().getHitBox()) {
+        for (MovecraftLocation movecraftLocation : e.getCraft().getHitBox()) {
             Location loc = movecraftLocation.toBukkit(w);
             Block block = loc.getBlock();
             BlockData data = block.getBlockData();
 
-            if(Config.LOG_INTERACTIONS) {
-                if(data instanceof Sign) {
+            if (Config.LOG_INTERACTIONS) {
+                if (data instanceof Sign) {
                     Sign sign = (Sign) data;
-                    if(sign.getLine(0).equalsIgnoreCase(typeName)) {
+                    if (sign.getLine(0).equalsIgnoreCase(typeName)) {
                         // Log interaction with sign
-                        if(!api.logInteraction(userName, loc))
+                        if (!api.logInteraction(userName, loc))
                             throw new RuntimeException(); // Throw an exception on failure to log
                     }
                 }
             }
-            if(Config.LOG_BLOCKS) {
+            if (Config.LOG_BLOCKS) {
                 // Log removal of all piloted blocks
-                if(!api.logRemoval(userName, loc, block.getType(), data))
+                if (!api.logRemoval(userName, loc, block.getType(), data))
                     throw new RuntimeException(); // Throw an exception on failure to log
             }
         }

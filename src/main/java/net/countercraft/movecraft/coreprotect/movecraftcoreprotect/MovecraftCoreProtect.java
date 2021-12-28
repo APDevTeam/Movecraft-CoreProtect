@@ -11,28 +11,25 @@ import org.jetbrains.annotations.Nullable;
 public final class MovecraftCoreProtect extends JavaPlugin {
     @Nullable
     private static MovecraftCoreProtect instance;
+    @Nullable
+    private CoreProtectAPI coreProtectAPI;
 
     @Nullable
     public static MovecraftCoreProtect getInstance() {
         return instance;
     }
 
-
-
-    @Nullable
-    private CoreProtectAPI coreProtectAPI;
-
     @Override
     public void onEnable() {
         Plugin plugin = getServer().getPluginManager().getPlugin("CoreProtect");
-        if(!(plugin instanceof CoreProtect)) {
+        if (!(plugin instanceof CoreProtect)) {
             // error
             coreProtectAPI = null;
             setEnabled(false);
             return;
         }
         coreProtectAPI = ((CoreProtect) plugin).getAPI();
-        if(!coreProtectAPI.isEnabled()) {
+        if (!coreProtectAPI.isEnabled()) {
             // error
             coreProtectAPI = null;
             setEnabled(false);
@@ -41,8 +38,8 @@ public final class MovecraftCoreProtect extends JavaPlugin {
 
         saveDefaultConfig();
 
-        getConfig().getBoolean("LogInteractions", true);
-        getConfig().getBoolean("LogBlocks", false);
+        Config.LOG_INTERACTIONS = getConfig().getBoolean("LogInteractions", true);
+        Config.LOG_BLOCKS = getConfig().getBoolean("LogBlocks", false);
 
         getServer().getPluginManager().registerEvents(new CraftDetectListener(), this);
         getServer().getPluginManager().registerEvents(new CraftReleaseListener(), this);
