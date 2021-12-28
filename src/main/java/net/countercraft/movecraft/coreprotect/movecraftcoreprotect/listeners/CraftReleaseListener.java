@@ -10,6 +10,7 @@ import net.countercraft.movecraft.events.CraftReleaseEvent;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.event.EventHandler;
@@ -35,11 +36,11 @@ public class CraftReleaseListener implements Listener {
         for (MovecraftLocation movecraftLocation : e.getCraft().getHitBox()) {
             Location loc = movecraftLocation.toBukkit(w);
             Block block = loc.getBlock();
-            BlockData data = block.getBlockData();
+            BlockState state = block.getState();
 
             if (Config.LOG_INTERACTIONS) {
-                if (data instanceof Sign) {
-                    Sign sign = (Sign) data;
+                if (state instanceof Sign) {
+                    Sign sign = (Sign) state;
                     if (sign.getLine(0).equalsIgnoreCase(typeName) // First line is of the correct type
                             || (sign.getLine(0).equalsIgnoreCase("Subcraft Rotate") // Or first line is Subcraft Rotate
                                 && sign.getLine(1).equalsIgnoreCase(typeName)) // And second line is the correct type
@@ -59,7 +60,7 @@ public class CraftReleaseListener implements Listener {
             }
             if (Config.LOG_BLOCKS) {
                 // Log placement of all released blocks
-                if (!api.logPlacement(userName, loc, block.getType(), data))
+                if (!api.logPlacement(userName, loc, block.getType(), block.getBlockData()))
                     throw new RuntimeException(); // Throw an exception on failure to log
             }
         }

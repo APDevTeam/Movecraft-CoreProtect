@@ -10,6 +10,7 @@ import net.countercraft.movecraft.events.CraftDetectEvent;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.event.EventHandler;
@@ -35,12 +36,12 @@ public class CraftDetectListener implements Listener {
         for (MovecraftLocation movecraftLocation : e.getCraft().getHitBox()) {
             Location loc = movecraftLocation.toBukkit(w);
             Block block = loc.getBlock();
-            BlockData data = block.getBlockData();
+            BlockState state = block.getState();
 
             if (Config.LOG_INTERACTIONS) {
-                if (data instanceof Sign) {
+                if (state instanceof Sign) {
                     MovecraftCoreProtect.getInstance().getLogger().info("Found sign at " + movecraftLocation);
-                    Sign sign = (Sign) data;
+                    Sign sign = (Sign) state;
                     if (sign.getLine(0).equalsIgnoreCase(typeName) // First line is of the correct type
                             || (sign.getLine(0).equalsIgnoreCase("Subcraft Rotate") // Or first line is Subcraft Rotate
                                 && sign.getLine(1).equalsIgnoreCase(typeName)) // And second line is the correct type
@@ -60,7 +61,7 @@ public class CraftDetectListener implements Listener {
             }
             if (Config.LOG_BLOCKS) {
                 // Log removal of all piloted blocks
-                if (!api.logRemoval(userName, loc, block.getType(), data))
+                if (!api.logRemoval(userName, loc, block.getType(), block.getBlockData()))
                     throw new RuntimeException(); // Throw an exception on failure to log
             }
         }
