@@ -1,2 +1,3 @@
 LogInteractions: true # Log only an interaction with the pilot/release signs of a craft on pilot/release
+                      # Note: This shows up as "player clicked sign" in CoreProtect
 LogBlocks: false # Log all blocks on pilot/release of a craft
