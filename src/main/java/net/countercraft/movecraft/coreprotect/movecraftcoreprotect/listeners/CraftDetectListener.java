@@ -39,11 +39,22 @@ public class CraftDetectListener implements Listener {
 
             if (Config.LOG_INTERACTIONS) {
                 if (data instanceof Sign) {
+                    MovecraftCoreProtect.getInstance().getLogger().info("Found sign at " + movecraftLocation);
                     Sign sign = (Sign) data;
-                    if (sign.getLine(0).equalsIgnoreCase(typeName)) {
+                    if (sign.getLine(0).equalsIgnoreCase(typeName) // First line is of the correct type
+                            || (sign.getLine(0).equalsIgnoreCase("Subcraft Rotate") // Or first line is Subcraft Rotate
+                                && sign.getLine(1).equalsIgnoreCase(typeName)) // And second line is the correct type
+                            || sign.getLine(0).equalsIgnoreCase("Release")) { // Or first line is Release
                         // Log interaction with sign
                         if (!api.logInteraction(userName, loc))
                             throw new RuntimeException(); // Throw an exception on failure to log
+                    }
+                    else {
+                        MovecraftCoreProtect.getInstance().getLogger().info(
+                                "Skipping sign\n\t- "
+                                        + movecraftLocation + "\n\t- "
+                                        + String.join("\n\t- ", sign.getLines())
+                        );
                     }
                 }
             }
