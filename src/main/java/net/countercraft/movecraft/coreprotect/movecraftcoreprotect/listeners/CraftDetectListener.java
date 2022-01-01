@@ -12,7 +12,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -38,25 +37,15 @@ public class CraftDetectListener implements Listener {
             Block block = loc.getBlock();
             BlockState state = block.getState();
 
-            if (Config.LOG_INTERACTIONS) {
-                if (state instanceof Sign) {
-                    MovecraftCoreProtect.getInstance().getLogger().info("Found sign at " + movecraftLocation);
-                    Sign sign = (Sign) state;
-                    if (sign.getLine(0).equalsIgnoreCase(typeName) // First line is of the correct type
-                            || (sign.getLine(0).equalsIgnoreCase("Subcraft Rotate") // Or first line is Subcraft Rotate
-                                && sign.getLine(1).equalsIgnoreCase(typeName)) // And second line is the correct type
-                            || sign.getLine(0).equalsIgnoreCase("Release")) { // Or first line is Release
-                        // Log interaction with sign
-                        if (!api.logInteraction(userName, loc))
-                            throw new RuntimeException(); // Throw an exception on failure to log
-                    }
-                    else {
-                        MovecraftCoreProtect.getInstance().getLogger().info(
-                                "Skipping sign\n\t- "
-                                        + movecraftLocation + "\n\t- "
-                                        + String.join("\n\t- ", sign.getLines())
-                        );
-                    }
+            if (Config.LOG_INTERACTIONS && state instanceof Sign) {
+                Sign sign = (Sign) state;
+                if (sign.getLine(0).equalsIgnoreCase(typeName) // First line is of the correct type
+                        || (sign.getLine(0).equalsIgnoreCase("Subcraft Rotate") // Or first line is Subcraft Rotate
+                            && sign.getLine(1).equalsIgnoreCase(typeName)) // And second line is the correct type
+                        || sign.getLine(0).equalsIgnoreCase("Release")) { // Or first line is Release
+                    // Log interaction with sign
+                    if (!api.logInteraction(userName, loc))
+                        throw new RuntimeException(); // Throw an exception on failure to log
                 }
             }
             if (Config.LOG_BLOCKS) {
