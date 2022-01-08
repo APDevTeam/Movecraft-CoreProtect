@@ -6,7 +6,7 @@
 
     <groupId>net.countercraft.movecraft.coreprotect</groupId>
     <artifactId>Movecraft-CoreProtect</artifactId>
-    <version>0.1.0-a.2</version>
+    <version>1.0.0-a.1</version>
     <packaging>jar</packaging>
 
     <name>Movecraft-CoreProtect</name>
