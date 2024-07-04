@@ -1,9 +1,9 @@
-package net.countercraft.movecraft.coreprotect.movecraftcoreprotect;
+package net.countercraft.movecraft.coreprotect;
 
 import net.coreprotect.CoreProtect;
 import net.coreprotect.CoreProtectAPI;
-import net.countercraft.movecraft.coreprotect.movecraftcoreprotect.listeners.CraftDetectListener;
-import net.countercraft.movecraft.coreprotect.movecraftcoreprotect.listeners.CraftReleaseListener;
+import net.countercraft.movecraft.coreprotect.listeners.CraftDetectListener;
+import net.countercraft.movecraft.coreprotect.listeners.CraftReleaseListener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
