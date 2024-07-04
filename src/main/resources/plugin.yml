@@ -1,8 +1,8 @@
 name: Movecraft-CoreProtect
-version: '${project.version}'
-main: net.countercraft.movecraft.coreprotect.movecraftcoreprotect.MovecraftCoreProtect
-api-version: 1.14
+version: ${projectVersion}
+main: net.countercraft.movecraft.coreprotect.MovecraftCoreProtect
+api-version: 1.18
 depend: [ Movecraft, CoreProtect ]
 authors: [ TylerS1066 ]
 description: Movecraft Integration with CoreProtect
-website: https://github.com/TylerS1066/Movecraft-CoreProtect
+website: https://github.com/APDevTeam/Movecraft-CoreProtect

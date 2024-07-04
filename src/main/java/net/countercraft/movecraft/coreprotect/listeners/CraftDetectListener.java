@@ -1,9 +1,9 @@
-package net.countercraft.movecraft.coreprotect.movecraftcoreprotect.listeners;
+package net.countercraft.movecraft.coreprotect.listeners;
 
 import net.coreprotect.CoreProtectAPI;
 import net.countercraft.movecraft.MovecraftLocation;
-import net.countercraft.movecraft.coreprotect.movecraftcoreprotect.Config;
-import net.countercraft.movecraft.coreprotect.movecraftcoreprotect.MovecraftCoreProtect;
+import net.countercraft.movecraft.coreprotect.Config;
+import net.countercraft.movecraft.coreprotect.MovecraftCoreProtect;
 import net.countercraft.movecraft.craft.PilotedCraft;
 import net.countercraft.movecraft.craft.type.CraftType;
 import net.countercraft.movecraft.events.CraftDetectEvent;

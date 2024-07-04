@@ -1,5 +1,5 @@
 # Movecraft CoreProtect Addon
-![CoreProtect](https://github.com/TylerS1066/Movecraft-CoreProtect/actions/workflows/maven.yml/badge.svg)
+![CoreProtect](https://github.com/APDevTeam/Movecraft-CoreProtect/actions/workflows/maven.yml/badge.svg)
 
 Home of the code for the following features:
  - CoreProtect logging support
@@ -8,7 +8,7 @@ Home of the code for the following features:
 The `main` branch is coded for 1.14.4 to 1.18.1 and Movecraft 8.x.
 
 ## Download
-Devevlopment builds can be found on the [GitHub Actions tab](https://github.com/TylerS1066/Movecraft-CoreProtect/actions) of this repository.
+Devevlopment builds can be found on the [GitHub Actions tab](https://github.com/APDevTeam/Movecraft-CoreProtect/actions) of this repository.
 
 Stable builds can be found on [our SpigotMC page](TBD).
 
@@ -23,7 +23,7 @@ Jars are located in `/target`.
 
 
 ## Support
-[Github Issues](https://github.com/TylerS1066/Movecraft-CoreProtect/issues)
+[Github Issues](https://github.com/APDevTeam/Movecraft-CoreProtect/issues)
 
 [Discord](http://bit.ly/JoinAP-Dev)
 
