@@ -9,7 +9,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
-    githubPackage("apdevteam/movecraft")
+    maven { githubPackage("apdevteam/movecraft")(this) }
     maven("https://maven.playpro.com")
 }
 
