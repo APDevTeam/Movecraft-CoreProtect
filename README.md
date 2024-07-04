@@ -1,26 +1,23 @@
 # Movecraft CoreProtect Addon
-![CoreProtect](https://github.com/APDevTeam/Movecraft-CoreProtect/actions/workflows/maven.yml/badge.svg)
+![CoreProtect](https://github.com/APDevTeam/Movecraft-CoreProtect/actions/workflows/gradle.yml/badge.svg)
 
 Home of the code for the following features:
  - CoreProtect logging support
 
 ## Version support
-The `main` branch is coded for 1.14.4 to 1.18.1 and Movecraft 8.x.
+The `main` branch is coded for 1.14.4+ and Movecraft 8.x.
 
 ## Download
-Devevlopment builds can be found on the [GitHub Actions tab](https://github.com/APDevTeam/Movecraft-CoreProtect/actions) of this repository.
+Releases can be found on the [releases tab](https://github.com/APDevTeam/Movecraft-CoreProtect/releases).
 
-Stable builds can be found on [our SpigotMC page](TBD).
+Development builds can be found on the [GitHub Actions tab](https://github.com/APDevTeam/Movecraft-CoreProtect/actions) of this repository.
 
 ## Building
-This plugin requires that the user setup their GitHub token in maven to authenticate with GitHub Packages, as described in [this wiki page](https://github.com/APDevTeam/Movecraft/wiki/Documentation).
-
-Then, run the following to build Movecraft-CoreProtect through `maven`.
+Run the following to build Movecraft-CoreProtect:
 ```
-mvn clean install
+./gradlew clean build --parallel
 ```
-Jars are located in `/target`.
-
+Jars are located in `/build/libs` directory.
 
 ## Support
 [Github Issues](https://github.com/APDevTeam/Movecraft-CoreProtect/issues)
