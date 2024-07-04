@@ -38,6 +38,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Publish to PaperMC Hangar
+      run: ./gradlew publishPluginPublicationToHangar --parallel
+      if: ${{ github.event_name == 'release' }}
+      env:
+        HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+
     - name: Stage jar
       run: mkdir staging && cp build/libs/Movecraft-CoreProtect.jar staging && mv staging/Movecraft-CoreProtect.jar staging/Movecraft-CoreProtect_$GITHUB_SHA.jar
     - name: Upload jar
