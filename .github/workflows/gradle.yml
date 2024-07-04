@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps:
@@ -33,21 +33,32 @@ jobs:
       run: ./gradlew clean build --parallel
 
     - name: Publish to GitHub Packages
-      run: ./gradlew publish --parallel
       if: ${{ github.event_name == 'release' }}
+      run: ./gradlew publish --parallel
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Publish to PaperMC Hangar
-      run: ./gradlew publishPluginPublicationToHangar --parallel
       if: ${{ github.event_name == 'release' }}
+      run: ./gradlew publishPluginPublicationToHangar --parallel
       env:
         HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
 
-    - name: Stage jar
+    - name: Stage jar for Actions
+      if: ${{ github.event_name != 'release' }}
       run: mkdir staging && cp build/libs/Movecraft-CoreProtect.jar staging && mv staging/Movecraft-CoreProtect.jar staging/Movecraft-CoreProtect_$GITHUB_SHA.jar
-    - name: Upload jar
+    - name: Upload jar to Actions
+      if: ${{ github.event_name != 'release' }}
       uses: actions/upload-artifact@v4
       with:
         name: Movecraft-CoreProtect_Dev-Build
         path: staging/Movecraft-CoreProtect_*.jar
+
+    - name: Stage jar for Release
+      if: ${{ github.event_name == 'release' }}
+      run: mkdir staging && cp build/libs/Movecraft-CoreProtect.jar staging && mv staging/Movecraft-CoreProtect.jar staging/Movecraft-CoreProtect_${{ github.event.release.tag_name }}.jar
+    - name: Upload jar to Release
+      if: ${{ github.event_name == 'release' }}
+      uses: softprops/action-gh-release@v2
+      with:
+        files: staging/Movecraft-CoreProtect_${{ github.event.release.tag_name }}.jar
