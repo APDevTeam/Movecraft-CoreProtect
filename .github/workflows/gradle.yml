@@ -43,6 +43,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE_VERSION: ${{ github.event.release.tag_name }}
 
+    - name: Publish to PaperMC Hangar
+      if: ${{ github.event_name == 'release' }}
+      run: ./gradlew publishPluginPublicationToHangar --parallel
+      env:
+        HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+        RELEASE_VERSION: ${{ github.event.release.tag_name }}
+
     - name: Stage jar for Actions
       if: ${{ github.event_name != 'release' }}
       run: mkdir staging && cp build/libs/Movecraft-CoreProtect.jar staging && mv staging/Movecraft-CoreProtect.jar staging/Movecraft-CoreProtect_$GITHUB_SHA.jar

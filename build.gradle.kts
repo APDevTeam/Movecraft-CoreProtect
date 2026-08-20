@@ -79,7 +79,7 @@ hangarPublish {
         platforms {
             register(io.papermc.hangarpublishplugin.model.Platforms.PAPER) {
                 jar.set(tasks.jar.flatMap { it.archiveFile })
-                platformVersions.set(listOf("1.20.6-1.21.5"))
+                platformVersions.set(listOf("1.20.6-26.2"))
                 dependencies {
                     hangar("Movecraft") {
                         required.set(true)
