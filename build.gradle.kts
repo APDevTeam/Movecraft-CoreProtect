@@ -2,7 +2,7 @@ plugins {
     `java-library`
     `maven-publish`
     id("io.github.apdevteam.github-packages") version "1.2.2"
-    id("io.papermc.hangar-publish-plugin") version "0.1.3"
+    id("io.papermc.hangar-publish-plugin") version "0.1.4"
 }
 
 repositories {
