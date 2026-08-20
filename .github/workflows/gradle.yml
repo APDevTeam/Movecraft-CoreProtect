@@ -16,14 +16,16 @@ jobs:
 
     steps:
     - name: Checkout Movecraft-CoreProtect
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
+      with:
+        fetch-depth: 0
     - name: Set up JDK 21
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
         java-version: '21'
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
+      uses: gradle/actions/setup-gradle@v6
       with:
         build-scan-publish: true
         build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
@@ -31,25 +33,22 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew clean build --parallel
+      env:
+        RELEASE_VERSION: ${{ github.event.release.tag_name }}
 
     - name: Publish to GitHub Packages
       if: ${{ github.event_name == 'release' }}
       run: ./gradlew publish --parallel
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Publish to PaperMC Hangar
-      if: ${{ github.event_name == 'release' }}
-      run: ./gradlew publishPluginPublicationToHangar --parallel
-      env:
-        HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+        RELEASE_VERSION: ${{ github.event.release.tag_name }}
 
     - name: Stage jar for Actions
       if: ${{ github.event_name != 'release' }}
       run: mkdir staging && cp build/libs/Movecraft-CoreProtect.jar staging && mv staging/Movecraft-CoreProtect.jar staging/Movecraft-CoreProtect_$GITHUB_SHA.jar
     - name: Upload jar to Actions
       if: ${{ github.event_name != 'release' }}
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: Movecraft-CoreProtect_Dev-Build
         path: staging/Movecraft-CoreProtect_*.jar
@@ -59,6 +58,8 @@ jobs:
       run: mkdir staging && cp build/libs/Movecraft-CoreProtect.jar staging && mv staging/Movecraft-CoreProtect.jar staging/Movecraft-CoreProtect_${{ github.event.release.tag_name }}.jar
     - name: Upload jar to Release
       if: ${{ github.event_name == 'release' }}
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         files: staging/Movecraft-CoreProtect_${{ github.event.release.tag_name }}.jar
+        tag_name: ${{ github.event.release.tag_name }}
+        token: ${{ secrets.GITHUB_TOKEN }}
